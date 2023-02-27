@@ -10,7 +10,7 @@ from asgiref.wsgi import WsgiToAsgi
 from flask import Flask
 from flask import jsonify
 from flask import request
-from OpenAIAuth.Cloudflare import Cloudflare
+from Cloudflare import Cloudflare
 
 GPT_PROXY = os.getenv('GPT_PROXY')
 GPT_HOST = os.getenv('GPT_HOST', '0.0.0.0')
@@ -92,6 +92,7 @@ def conversation(subpath: str):
                 "Cloudflare token expired. Please wait a few minutes while I refresh"
             })
         # Return response
+        print(response.text)
         return response.text
     except Exception as exc:
         return jsonify({"error": str(exc)})
